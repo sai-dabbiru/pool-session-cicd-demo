@@ -26,7 +26,17 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+app.get('/eval', function(req, res) {
+  const code = req.query.code;
+  try {
+    const result = eval(code); // dangerous
+    res.send(`Result: ${result}`);
+  } catch (e) {
+    res.status(500).send(e.toString());
+  }
+});
 
+const SECRET_KEY = "mySuperSecretKey123";
 
 
 
