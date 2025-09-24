@@ -53,6 +53,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ secrets.NODE_VERSION }}
+    - run: npm install pm2
     - run: npm install
     - run: pm2 stop express-app || true
     - run: pm2 start npm --name express-app -- start
